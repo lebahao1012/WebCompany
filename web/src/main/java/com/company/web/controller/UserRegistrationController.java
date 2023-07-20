@@ -1,10 +1,14 @@
 package com.company.web.controller;
 
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.company.web.entity.User;
 import com.company.web.repository.UserRepository;
@@ -22,9 +26,13 @@ public class UserRegistrationController {
         return "index";
     }
 
-    @PostMapping("registerUser")
-    public String registerUser(@ModelAttribute("user") User user) {
-        userRegistrationService.registerUser(user);
-        return "redirect:/";
+    @PostMapping("/api/register")
+    public ResponseEntity<User> registerUser(@RequestBody User user) {
+        if (userRegistrationService.isEmailAvailable(user.getEmail()) == true) {
+            userRegistrationService.registerUser(user);
+            return ResponseEntity.ok(user);
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
     }
 }

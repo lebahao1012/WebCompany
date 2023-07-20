@@ -16,4 +16,8 @@ public class UserRegistrationService {
         userRepository.save(user);
     }
 
+    public boolean isEmailAvailable(String email) {
+        User user = userRepository.findByEmail(email);
+        return user == null;
+    }
 }

@@ -65,7 +65,7 @@ loginForm.addEventListener("submit", async (e) => {
       const user = await response.json();
       updateUIAfterLogin(user);
     } else {
-      throw new Error("Invalid credentials");
+      throw new Error("Email or password not valid. Please try again.");
     }
   } catch(error) {
     alert(error.message);
@@ -118,6 +118,42 @@ function updateUIAfterLogin(user) {
   signupForm.style.display = "none";
   home.classList.remove("show");
   formOpenBtn.style.display = "none";
+}
+
+signupForm.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  
+  const usernameInput = signupForm.querySelector('input[name="username"]');
+  const emailInput = signupForm.querySelector('input[name="email"]');
+  const passwordInput = signupForm.querySelector('input[name="password"]');
+
+  try {
+    const response = await fetch('/api/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        username: usernameInput.value,
+        email: emailInput.value,
+        password: passwordInput.value
+      })
+    });
+
+    if (response.ok) {
+      const user = await response.json();
+      updateUIAfterRegistration(user);
+    } else {
+      throw new Error('Registration failed. Please try again.');
+    }
+  } catch (error) {
+    alert(error.message);
+  }
+});
+
+function updateUIAfterRegistration(user) {
+  alert(`Registration successful for user ${user.username}! Please get back to the home page in order to login.`);
+  window.location.href = '/'; // chuyển hướng người dùng đến trang chủ
 }
 
 logoutBtn.addEventListener("click", (e) => {
