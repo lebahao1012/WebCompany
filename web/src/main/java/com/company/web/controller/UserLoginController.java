@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class UserLoginController {
 
     @Autowired(required = true)
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @GetMapping("")
     public String login(Model model) {
