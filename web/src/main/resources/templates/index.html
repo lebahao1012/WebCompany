@@ -815,72 +815,17 @@
                     </div>
                     <div class="row">
                         <div id="sliderBlog" class="owl-carousel">
-                            <div class="single-blog-article">
+                            <div class="single-blog-article" th:each = "post: ${blog}">
                                 <div class="blog-post-img-thumb">
-                                    <a href="blog-details.html" target="_blank">
-                                        <img src="img/blog-img1.jpg" alt="">
+                                    <a href="@{/blog-details/{id}(id=${post.id})}" target="_blank">
+                                        <img src="img/blog-img1.jpg" th:alt="${post.title}">
                                     </a>
                                 </div>
                                 <div class="blog-post-content-area">
-                                    <h3><a href="blog-details.html" target="_blank">Continually reinvent
-                                        competitive</a></h3>
-                                    <p>Rapidiously aggregate client-focused strategic theme areas after
-                                        high-quality data. Continually aggregate diverse ideas. </p>
+                                    <h3><a th:href="@{/blog-details/{id}(id=${post.id})}" target="_blank" th:text="${post.title}">Title</a></h3>
+                                    <p th:text="${post.short_detail}">Description</p>
                                     <div class="blog-footer-area">
-                                        <a class="readmore-btn" href="blog-details.html" target="_blank">Read
-                                            More <i class="fa fa-angle-right"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="single-blog-article">
-                                <div class="blog-post-img-thumb">
-                                    <a href="blog-details.html" target="_blank">
-                                        <img src="img/blog-img2.jpg" alt="">
-                                    </a>
-                                </div>
-                                <div class="blog-post-content-area">
-                                    <h3><a href="blog-details.html" target="_blank">Competently impact
-                                        strategic</a></h3>
-                                    <p>Professionally grow technically sound technologies with fully researched
-                                        metrics. Assertively embrace empowered.</p>
-                                    <div class="blog-footer-area">
-                                        <a class="readmore-btn" href="blog-details.html" target="_blank">Read
-                                            More <i class="fa fa-angle-right"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="single-blog-article">
-                                <div class="blog-post-img-thumb">
-                                    <a href="blog-details.html" target="_blank">
-                                        <img src="img/blog-img3.jpg" alt="">
-                                    </a>
-                                </div>
-                                <div class="blog-post-content-area">
-                                    <h3><a href="blog-details.html" target="_blank">Rapidiously predominate
-                                        just</a></h3>
-                                    <p>Continually fabricate magnetic interfaces through inexpensive solutions.
-                                        Continually iterate distributed infomediaries. </p>
-                                    <div class="blog-footer-area">
-                                        <a class="readmore-btn" href="blog-details.html" target="_blank">Read
-                                            More <i class="fa fa-angle-right"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="single-blog-article">
-                                <div class="blog-post-img-thumb">
-                                    <a href="blog-details.html" target="_blank">
-                                        <img src="img/blog-img4.jpg" alt="">
-                                    </a>
-                                </div>
-                                <div class="blog-post-content-area">
-                                    <h3><a href="blog-details.html" target="_blank">Interactively productize
-                                        low-risk</a></h3>
-                                    <p>Appropriately develop high-payoff catalysts for change after premier
-                                        e-markets. Interactively maximize pandemic niche markets.</p>
-                                    <div class="blog-footer-area">
-                                        <a class="readmore-btn" href="blog-details.html" target="_blank">Read
+                                        <a class="readmore-btn" th:href="@{/blog-details/{id}(id=${post.id})}" target="_blank">Read
                                             More <i class="fa fa-angle-right"></i></a>
                                     </div>
                                 </div>
@@ -916,7 +861,7 @@
                             </div>
                         </div>
                         <div class="col-md-7">
-                            <form action="php/mail.php" method="POST" id="contactForm1" class="contact-us-form" novalidate="novalidate">
+                            <form method="POST" id="contactForm1" class="contact-us-form" novalidate="novalidate">
                                 <h6>Reach us quickly</h6>
                                 <div class="row">
                                     <div class="col-sm-6 col-xs-12">

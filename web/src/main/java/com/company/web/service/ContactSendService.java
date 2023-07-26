@@ -12,7 +12,7 @@ public class ContactSendService {
     @Autowired
     private ContactPersonRepository contactPersonRepository;
 
-    public void registerContact(ContactPerson person) {
-        contactPersonRepository.save(person);
+    public void registerContact(ContactPerson contactPerson) {
+        contactPersonRepository.save(contactPerson);
     }
 }

@@ -3,7 +3,11 @@ package com.company.web.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.yaml.snakeyaml.events.Event.ID;
 
+import com.company.web.entity.Blog;
 import com.company.web.service.BlogService;
 
 import lombok.AllArgsConstructor;
@@ -20,8 +24,13 @@ public class BlogController {
     }
 
     @GetMapping("/blog-details/{id}")
-    public String showBlog(Model model) {
-        model.addAttribute("blog", blogService.getBlog(null));
+    public String showBlog(@PathVariable Integer id, Model model) {
+        Blog blog = blogService.getBlog(id);
+        if (blog == null) {
+            // Xử lý nếu không tìm thấy bài đăng blog với ID tương ứng
+            return "error";
+        }
+        model.addAttribute("blog", blog);
         return "blog-details";
     }
 

@@ -1,10 +1,10 @@
 package com.company.web.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.yaml.snakeyaml.events.Event.ID;
 
 import com.company.web.entity.Blog;
 import com.company.web.repository.BlogRepository;
@@ -18,7 +18,8 @@ public class BlogService {
         return blogRepository.findAll();
     }
 
-    public Blog getBlog(ID id) {
-        return blogRepository.findById(id);
+    public Blog getBlog(Integer id) {
+        Optional<Blog> optionalBlog = blogRepository.findById(id);
+        return optionalBlog.orElse(null);
     }
 }

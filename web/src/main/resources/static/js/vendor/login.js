@@ -106,6 +106,17 @@ function resetUIState() {
   });
 }
 
+// Function to show the contact page after successful login
+function showContactPage() {
+  home.classList.add("show");
+} 
+
+// Function to show the contact page after successful login
+function showContactPage() {
+  const contactPage = document.querySelector(".contact-page");
+  contactPage.style.display = "block";
+}
+
 // Function to update UI after successful login
 function updateUIAfterLogin(user) {
   userInfo.textContent = user.name;
@@ -118,6 +129,8 @@ function updateUIAfterLogin(user) {
   signupForm.style.display = "none";
   home.classList.remove("show");
   formOpenBtn.style.display = "none";
+  
+  showContactPage();
 }
 
 signupForm.addEventListener('submit', async (event) => {
@@ -159,6 +172,47 @@ function updateUIAfterRegistration(user) {
 logoutBtn.addEventListener("click", (e) => {
   e.preventDefault();
   resetUIState();
+});
+
+// Show the success contact
+document.addEventListener("DOMContentLoaded", function() {
+  // Get the button element by its ID
+  const btnContactUs = document.getElementById("btnContactUs");
+  const nameInput = document.querySelector('input[name="name"]');
+  const emailInput = document.querySelector('input[name="email"]');
+  const phoneInput = document.querySelector('input[name="phone"]');
+  const companyInput = document.querySelector('input[name="company"]');
+  const messageInput = document.querySelector('textarea[name="message"]');
+
+  // Add a click event listener to the button
+  btnContactUs.addEventListener("click", async function() {
+    try {
+      // Make an asynchronous HTTP POST request to the server
+      const response = await fetch('/api/contacts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: nameInput.value,
+          email: emailInput.value,
+          phone: phoneInput.value,
+          company: companyInput.value,
+          message: messageInput.value
+        })
+      });
+
+      if (response.ok) {
+        // Show the alert when the message is successfully sent
+        alert("Send message successful");
+      } else {
+        throw new Error('Sending message failed. Please try again.');
+      }
+    } catch (error) {
+      // Show an error alert if something goes wrong with the request
+      alert(error.message);
+    }
+  });
 });
 
 
