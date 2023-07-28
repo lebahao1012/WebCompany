@@ -30,8 +30,8 @@ public class ContactSendController {
     }
 
     @PostMapping("/api/contacts")
-    public ResponseEntity<ContactPerson> registerUser(@ModelAttribute ContactPerson contactPerson) {
-        System.out.println("Hello");
+    public ResponseEntity<ContactPerson> registerUser(@RequestBody ContactPerson contactPerson) {
+        System.out.println(contactPerson.toString());
         contactSendService.registerContact(contactPerson);
         return ResponseEntity.ok(contactPerson);
     }

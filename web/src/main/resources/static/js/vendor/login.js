@@ -10,15 +10,6 @@ const formOpenBtn = document.querySelector("#form-open"),
   logoutBtn = document.querySelector("#logout"),
   userInfo = document.querySelector("#user-info");
 
-// Function to update UI after successful login
-function updateUIAfterLogin(user) {
-  userInfo.textContent = user.name;
-  userInfo.style.display = "inline-block";
-  logoutBtn.style.display = "inline-block";
-  loginForm.style.display = "none";
-  signupForm.style.display = "none";
-}
-
 formOpenBtn.addEventListener("click", () => home.classList.add("show"));
 formCloseBtn.addEventListener("click", () => home.classList.remove("show"));
 
@@ -89,6 +80,8 @@ function resetUIState() {
   signupForm.style.display = "none";
   formOpenBtn.style.display = "inline-block";
 
+  updateButtonLinks(false);
+
   const toggleFormDisplay = (formToShow, formToHide) => {
     formContainer.classList.add("active");
     formToShow.style.display = "block";
@@ -117,9 +110,22 @@ function showContactPage() {
   contactPage.style.display = "block";
 }
 
+function updateButtonLinks(loggedIn) {
+  const blogsLink = document.getElementById("blogsLink");
+  const noblogsLink = document.getElementById("noblogsLink");
+
+  if (loggedIn) {
+    blogsLink.style.display = "inline-block";
+    noblogsLink.style.display = "none";
+  } else {
+    blogsLink.style.display = "none";
+    noblogsLink.style.display = "inline-block";
+  }
+}
+
 // Function to update UI after successful login
 function updateUIAfterLogin(user) {
-  userInfo.textContent = user.name;
+  userInfo.textContent = user.username;
   userInfo.style.display = "inline-block";
   userInfo.style.color = "ghostwhite";
   userInfo.style.margin = "16px";
@@ -129,8 +135,21 @@ function updateUIAfterLogin(user) {
   signupForm.style.display = "none";
   home.classList.remove("show");
   formOpenBtn.style.display = "none";
+  updateButtonLinks(true);
   
   showContactPage();
+  // Store the login state in Local Storage
+  localStorage.setItem("loggedInUser", JSON.stringify(user));
+}
+
+function checkLoggedInUser() {
+  const storedUser = localStorage.getItem("loggedInUser");
+  if (storedUser) {
+    const user = JSON.parse(storedUser);
+    updateUIAfterLogin(user);
+  } else {
+    resetUIState(); // Ensure buttons are set correctly when user is not logged in
+  }
 }
 
 signupForm.addEventListener('submit', async (event) => {
@@ -176,16 +195,32 @@ logoutBtn.addEventListener("click", (e) => {
 
 // Show the success contact
 document.addEventListener("DOMContentLoaded", function() {
+  checkLoggedInUser();
   // Get the button element by its ID
   const btnContactUs = document.getElementById("btnContactUs");
-  const nameInput = document.querySelector('input[name="name"]');
-  const emailInput = document.querySelector('input[name="email"]');
-  const phoneInput = document.querySelector('input[name="phone"]');
-  const companyInput = document.querySelector('input[name="company"]');
-  const messageInput = document.querySelector('textarea[name="message"]');
 
   // Add a click event listener to the button
-  btnContactUs.addEventListener("click", async function() {
+  btnContactUs.addEventListener("click", async function(event) {
+    event.preventDefault(); // Prevent the default form submission behavior
+
+    const nameInput = document.querySelector('input[name="name"]');
+    const emailInput = document.querySelector('input[name="mail"]');
+    const phoneInput = document.querySelector('input[name="phone"]');
+    const companyInput = document.querySelector('input[name="company"]');
+    const messageInput = document.querySelector('textarea[name="message"]');
+    let d = Date();
+
+    const data = {
+      name: nameInput.value,
+      email: emailInput.value,
+      mobile: phoneInput.value,
+      company: companyInput.value,
+      message: messageInput.value,
+      timestamp: d // Thêm trường thời gian thực vào đối tượng JSON
+    };
+
+    console.log(data);
+
     try {
       // Make an asynchronous HTTP POST request to the server
       const response = await fetch('/api/contacts', {
@@ -196,9 +231,10 @@ document.addEventListener("DOMContentLoaded", function() {
         body: JSON.stringify({
           name: nameInput.value,
           email: emailInput.value,
-          phone: phoneInput.value,
+          mobile: phoneInput.value,
           company: companyInput.value,
-          message: messageInput.value
+          message: messageInput.value,
+          timestamp: d
         })
       });
 

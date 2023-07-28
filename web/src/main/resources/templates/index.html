@@ -84,7 +84,7 @@
                                 <li><a class="page-scroll" href="#faqs">Faq</a></li>
                                 <li><a class="page-scroll" href="#news">News</a></li>
                                 <li><a class="page-scroll" href="#contact">Contact</a></li>
-                                <li id="user-info" style="display: none;"></li>
+                                <li id="user-info" style="display: none;">Hi,</li>
                                 <li id="logout" style="display: none;"><a class="page-scroll" href="#">Logout</a></li>
                                 <button class="button" id="form-open">Login</button>
                             </ul>
@@ -810,6 +810,15 @@
                                 <p>Streamlining different processes and workflows by using user access control Onebook
                                     prompts efficiency and productivity levels of an organization, and reduces operating
                                     costs.</p>
+                                <p></p>
+                                <!-- move to blog page -->
+                                <div class="blog-page" >
+                                    <a id="noblogsLink" th:href="@{/blog}" class="btn softo-solid-btn center-btn">Show All Blogs</a>
+                                </div>
+                                <!-- move to blog page without login -->
+                                <div class="blog-page" >
+                                    <a id="blogsLink" th:href="@{/blog-login}" class="btn softo-solid-btn center-btn">Show All Blogs</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -872,7 +881,7 @@
                                     </div>
                                     <div class="col-sm-6 col-xs-12">
                                         <div class="form-group">
-                                            <input type="email" class="form-control" name="email"
+                                            <input type="text" class="form-control" name="mail"
                                                    placeholder="Enter email" required="required">
                                         </div>
                                     </div>
@@ -880,7 +889,7 @@
                                 <div class="row">
                                     <div class="col-sm-6 col-xs-12">
                                         <div class="form-group">
-                                            <input type="text" name="phone" value="" class="form-control"
+                                            <input type="text" name="phone" class="form-control"
                                                    id="phone" placeholder="Your Phone">
                                         </div>
                                     </div>
@@ -905,6 +914,10 @@
                                                 id="btnContactUs">
                                             Send Message
                                         </button>
+                                    </div>
+                                    <!-- Modified code  -->
+                                    <div class="contact-page">
+                                        <a th:href="@{/contacts}" class="btn softo-solid-btn pull-left">Show Contact Page</a>
                                     </div>
                                 </div>
                             </form>

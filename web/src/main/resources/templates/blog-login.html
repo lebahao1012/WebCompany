@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!--title-->
-    <title>ApeTech - App Landing Page Template</title>
+    <title>ApeTech - App Landing Page Template - Log in</title>
 
     <!--favicon icon-->
     <link rel="icon" th:href="@{/img/favicon.png}" type="image/png" sizes="16x16">
@@ -84,7 +84,12 @@
                                 <li><a class="page-scroll" th:href="@{/}">Faq</a></li>
                                 <li><a class="page-scroll" th:href="@{/}">News</a></li>
                                 <li><a class="page-scroll" th:href="@{/}">Contact</a></li>
-                                <button class="button" id="form-open">Login</button>
+                                <li id="user-info"></li>
+                                <li id="logout" style="display: inline-block">
+                                    <a class="page-scroll" th:href="@{/blog}"
+                                      >Logout</a
+                                    >
+                                  </li>
                             </ul>
                         </div>
 
@@ -94,78 +99,14 @@
             <!--end navbar-->
         </header>
         <!--end header section-->
-        
-         <!-- Home -->
-         <section class="home">
-            <div class="form_container">
-            <i class="fa fa-window-close form_close"></i>
-            <!-- Login From -->
-            <div class="form login_form">
-                <form action="#" th:action="@{/api/login}" th:object="${user}" method="post">
-                <h2>Login</h2>
-    
-                <div class="input_box">
-                    <input type="email" placeholder="Enter your email" th:field="*{email}" required />
-                    <i class="uil uil-envelope-alt email"></i>
-                </div>
-                <div class="input_box">
-                    <input type="password" placeholder="Enter your password" th:field="*{password}" required />
-                    <i class="uil uil-lock password"></i>
-                    <i class="uil uil-eye-slash pw_hide"></i>
-                </div>
-    
-                <div class="option_field">
-                    <span class="checkbox">
-                    <input type="checkbox" id="check" />
-                    <label for="check">Remember me</label>
-                    </span>
-                    <a href="#" class="forgot_pw">Forgot password?</a>
-                </div>
-    
-                <button class="button">Login Now</button>
-                <div class="login_signup">Don't have an account? <a href="#" id="signup">Signup</a></div>
-                </form>
-            </div>
-    
-            <!-- Signup From -->
-            <div class="form signup_form">
-                <form action="#" th:action="@{/registerUser}" th:object="${user}" method="post">
-                <h2>Signup</h2>
-    
-                <div class="input_box">
-                    <input type="email" th:field="*{email}" placeholder="Enter your email" required />
-                    <i class="uil uil-envelope-alt email"></i>
-                </div>
-                <div class="input_box">
-                    <input type="text" th:field="*{username}" placeholder="Username" required />
-                </div>
-                <div class="input_box">
-                    <input type="password" th:field="*{password}" placeholder="Create password" required />
-                    <i class="uil uil-lock password"></i>
-                    <i class="uil uil-eye-slash pw_hide"></i>
-                </div>
-                <div class="input_box">
-                    <input type="tel" th:field="*{mobile}" placeholder="Enter your mobile phone number" pattern="[0-9]+" required />
-                    <i class="uil uil-phone-alt phone"></i>
-                </div>
-                <div class="input_box">
-                    <input type="text" th:field="*{address}" placeholder="Enter your address" required />
-                    <i class="uil uil-location-pin-alt address"></i>
-                </div>
-                <button class="button">Signup Now</button>
-    
-                <div class="login_signup">Already have an account? <a href="#" id="login">Login</a></div>
-                </form>
-            </div>
-            </div>
-        </section>
+
         <!--start breadcrumb section-->
         <section class="breadcrumb-section" style="background: url('img/video-play.jpg')no-repeat center center fixed">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="text-center breadcrumb-content">
-                            <h2>Our Blog</h2>
+                            <h2>Our Blog - Login</h2>
                             <p>Intrinsicly brand market-driven supply chains before tactical intellectual capital. Collaboratively mesh effective relationships before granular products. Holisticly.</p>
                             <ul class="breadcrumb">
                                 <li><a th:href="@{/}">Home</a></li>
@@ -203,6 +144,11 @@
                     </div>
                 </div>
             </div>
+            <div class="create-post">
+                <a href="post.html" class="btn softo-solid-btn center-btn"
+                  >Create New Post</a
+                >
+              </div>
         </section>
        <!--start blog articale section-->
 

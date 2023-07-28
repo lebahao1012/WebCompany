@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.yaml.snakeyaml.events.Event.ID;
 
 import com.company.web.entity.Blog;
+import com.company.web.entity.User;
 import com.company.web.service.BlogService;
 
 import lombok.AllArgsConstructor;
@@ -17,8 +18,16 @@ import lombok.AllArgsConstructor;
 public class BlogController {
     private BlogService blogService;
 
+    @GetMapping("/blog-login")
+    public String getAllBlogLogin(Model model) {
+        model.addAttribute("blog", blogService.getAllBlog());
+        return "blog-login";
+    }
+
     @GetMapping("/blog")
     public String getAllBlog(Model model) {
+        User user = new User();
+        model.addAttribute("user", user);
         model.addAttribute("blog", blogService.getAllBlog());
         return "blog";
     }

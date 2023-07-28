@@ -1,5 +1,8 @@
 package com.company.web.entity;
 
+import java.sql.Date;
+import java.time.LocalDate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -36,5 +39,21 @@ public class ContactPerson {
 
     @Column(name = "message")
     private String message;
+
+    @Column(name = "datestamp")
+    private Date datestamp;
+
+    @Override
+    public String toString() {
+        return "{" +
+                " ur_id='" + getUr_id() + "'" +
+                ", name='" + getName() + "'" +
+                ", email='" + getEmail() + "'" +
+                ", mobile='" + getMobile() + "'" +
+                ", company='" + getCompany() + "'" +
+                ", message='" + getMessage() + "'" +
+                ", datestamp='" + getDatestamp() + "'" +
+                "}";
+    }
 
 }
