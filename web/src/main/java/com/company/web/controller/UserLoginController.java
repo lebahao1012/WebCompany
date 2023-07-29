@@ -22,10 +22,14 @@ public class UserLoginController {
     @Autowired(required = true)
     private UserRepository userRepository;
 
+    @Autowired
+    private BlogService blogService;
+
     @GetMapping("")
     public String login(Model model) {
         User user = new User();
         model.addAttribute("user", user);
+        model.addAttribute("blog", blogService.getLatestBlog());
         return "index";
     }
 

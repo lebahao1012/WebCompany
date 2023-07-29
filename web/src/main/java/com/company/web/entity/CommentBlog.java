@@ -1,6 +1,5 @@
 package com.company.web.entity;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -10,8 +9,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,14 +20,15 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@EqualsAndHashCode
+@AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
 @Entity
-@Table(name = "contact")
-public class ContactPerson {
+@Table(name = "comment")
+public class CommentBlog {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer ur_id;
+    private Integer id;
 
     @Column(name = "name")
     private String name;
@@ -34,32 +36,17 @@ public class ContactPerson {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "mobile")
-    private String mobile;
+    @Column(name = "blog_id")
+    private Integer blogId;
 
-    @Column(name = "company")
-    private String company;
-
-    @Column(name = "message")
+    @Lob
+    @Column(name = "message", columnDefinition = "TEXT")
     private String message;
 
     @Column(name = "datestamp")
     private String datestamp;
 
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-
-    @Override
-    public String toString() {
-        return "{" +
-                " ur_id='" + getUr_id() + "'" +
-                ", name='" + getName() + "'" +
-                ", email='" + getEmail() + "'" +
-                ", mobile='" + getMobile() + "'" +
-                ", company='" + getCompany() + "'" +
-                ", message='" + getMessage() + "'" +
-                ", datestamp='" + getDatestamp() + "'" +
-                "}";
-    }
 
     @PrePersist
     public void prePersist() {

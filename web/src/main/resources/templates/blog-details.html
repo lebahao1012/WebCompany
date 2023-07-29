@@ -124,7 +124,7 @@
                                     <img src="img/blog-img2.jpg" alt="Blog single image" class="img-responsive">
                                 </div>
                                 <h1 th:text="${post.title}"></h1>
-                                <div class="blog-details-post-meta">Posted <span>1 january 2018</span> <p th:text="${post.author}"></p></div>
+                                <div class="blog-details-post-meta">Posted <span th:text="${post.datestamp}"></span> <p th:text="${post.author}"></p></div>
                                 <div class="blog-details-text">
 
                                     <p th:text="${post.detail}">Description</p>
@@ -133,23 +133,14 @@
                                     <!--start comments section-->
                                     <div class="col-sm-12">
                                         <h3 class="blog-details-subtitle">Post Comments</h3>
-                                        <ul class="blog-comments">
+                                        <ul class="blog-comments" th:each = "comment: ${comment}">
                                             <li>
                                                 <img src="img/t2.jpg" alt="">
                                                 <div class="blog-comment-author">
-                                                    <h6>Lillie J. Yates</h6>
-                                                    <a href="#" class="active"> Reply </a>
-                                                    <span>Dec 26, 2017 at 15:35</span>
-                                                    <p>Continually leverage existing distinctive sources after excellent data. Interactively evolve enterprise leadership skills vis-a-vis.</p>
-                                                </div>
-                                            </li>
-                                            <li class="reply">
-                                                <img src="img/t3.jpg" alt="">
-                                                <div class="blog-comment-author">
-                                                    <h6>Todd B. Tucker</h6>
-                                                    <a href="#"> Reply </a>
-                                                    <span>Jan 16, 2018 at 04:35</span>
-                                                    <p>Professionally envisioneer enabled interfaces vis-a-vis plug-and-play supply chains. Competently benchmark real-time value without process-centric.</p>
+                                                    <h6 th:text="${comment.name}"></h6>
+                                                    <a href="#" class="active left"> Reply </a>
+                                                    <span th:text="${comment.datestamp}"></span>
+                                                    <p th:text="${comment.message}"></p>
                                                 </div>
                                             </li>
                                         </ul>

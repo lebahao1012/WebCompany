@@ -824,18 +824,20 @@
                     </div>
                     <div class="row">
                         <div id="sliderBlog" class="owl-carousel">
-                            <div class="single-blog-article" th:each = "post: ${blog}">
-                                <div class="blog-post-img-thumb">
-                                    <a href="@{/blog-details/{id}(id=${post.id})}" target="_blank">
-                                        <img src="img/blog-img1.jpg" th:alt="${post.title}">
-                                    </a>
-                                </div>
-                                <div class="blog-post-content-area">
-                                    <h3><a th:href="@{/blog-details/{id}(id=${post.id})}" target="_blank" th:text="${post.title}">Title</a></h3>
-                                    <p th:text="${post.short_detail}">Description</p>
-                                    <div class="blog-footer-area">
-                                        <a class="readmore-btn" th:href="@{/blog-details/{id}(id=${post.id})}" target="_blank">Read
-                                            More <i class="fa fa-angle-right"></i></a>
+                            <div th:each = "post: ${blog}">
+                                <div class="single-blog-article mb-30">
+                                    <div class="blog-post-img-thumb">
+                                        <a href="@{/blog-details/{id}(id=${post.id})}" target="_blank">
+                                            <img src="img/blog-img1.jpg" th:alt="${post.title}">
+                                        </a>
+                                    </div>
+                                    <div class="blog-post-content-area">
+                                        <h3><a th:href="@{/blog-details/{id}(id=${post.id})}" target="_blank" th:text="${post.title}">Title</a></h3>
+                                        <p th:text="${post.short_detail}">Description</p>
+                                        <div class="blog-footer-area">
+                                            <a class="readmore-btn" th:href="@{/blog-details/{id}(id=${post.id})}" target="_blank">Read
+                                                More <i class="fa fa-angle-right"></i></a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

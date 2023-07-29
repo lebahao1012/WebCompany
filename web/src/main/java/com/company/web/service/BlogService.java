@@ -18,6 +18,10 @@ public class BlogService {
         return blogRepository.findAll();
     }
 
+    public List<Blog> getLatestBlog() {
+        return blogRepository.findTop4ByOrderByPostDateDesc();
+    }
+
     public Blog getBlog(Integer id) {
         Optional<Blog> optionalBlog = blogRepository.findById(id);
         return optionalBlog.orElse(null);
