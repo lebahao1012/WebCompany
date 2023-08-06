@@ -84,6 +84,7 @@
                                 <li><a class="page-scroll" th:href="@{/}">Faq</a></li>
                                 <li><a class="page-scroll" th:href="@{/}">News</a></li>
                                 <li><a class="page-scroll" th:href="@{/}">Contact</a></li>
+                                <li id="user-info" style="display: none;"></li>
                                 <button class="button" id="form-open">Login</button>
                             </ul>
                         </div>
@@ -96,12 +97,12 @@
         <!--end header section-->
         
          <!-- Home -->
-         <section class="home">
+        <section class="home">
             <div class="form_container">
             <i class="fa fa-window-close form_close"></i>
             <!-- Login From -->
             <div class="form login_form">
-                <form action="#" th:action="@{/api/login}" th:object="${user}" method="post">
+                <form action="#" th:action="@{/blog-login}" th:object="${user}" method="post">
                 <h2>Login</h2>
     
                 <div class="input_box">
@@ -261,14 +262,11 @@
 <!--fullscreen background video js-->
 <script th:src="@{/js/jquery.mb.ytplayer.min.js}"></script>
 
-<!--typed js -->
-<script th:src="@{/static/js/typed.min.js}"></script>
-
 <!--magnific popup js-->
 <script th:src="@{/js/magnific-popup.min.js}"></script>
 
 <!-- custom script -->
 <script th:src="@{/js/scripts.js}"></script>
-<script th:src="@{/js/vendor/login.js}"></script>
+<script th:src="@{/js/vendor/createpost.js}"></script>
 </body>
 </html>
